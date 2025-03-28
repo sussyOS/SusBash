@@ -1,5 +1,6 @@
 import os
 import sys
+from lib import sys as lib
 
 path = os.path.dirname(os.path.abspath(__file__))
 
@@ -14,6 +15,8 @@ def run_command(command):
                   cls - clear the screen
                   cd - change directory
                   ls - list files in current directory
+                  mkdir - create a directory
+                  rm - remove a file
                   """)
         case "cls":
             os.system("cls||clear")         
@@ -27,6 +30,21 @@ def run_command(command):
                         print(f"Directory not found: {command[1]}")
                 elif command[0] == "ls":
                     print("\n".join(os.listdir()))
+                elif command[0] == "cat":
+                    try:
+                        with open(command[1], "r") as file:
+                            print(file.read())
+                    except FileNotFoundError:
+                        print(f"File not found: {command[1]}")
+                elif command[0] == "echo":  
+                    print(" ".join(command[1:]))
+                elif command[0] == "mkdir": 
+                    try:
+                        os.mkdir(command[1])
+                    except FileExistsError:
+                        print(f"Directory already exists: {command[1]}")
+                elif command[0] == "rm":
+                    lib.rm(command)    
                 else:
                     print(f"Command not found: {command[0]}")
             except IndexError:
