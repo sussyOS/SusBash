@@ -16,10 +16,7 @@ def run_command(command):
                   ls - list files in current directory
                   """)
         case "cls":
-            if sys.platform == "win32":
-                os.system("cls")
-            else:
-                os.system("clear")
+            os.system("cls||clear")         
         case _:
             command = command.split()
             try:
@@ -31,9 +28,9 @@ def run_command(command):
                 elif command[0] == "ls":
                     print("\n".join(os.listdir()))
                 else:
-                    print(f"Command not found: {command}")
+                    print(f"Command not found: {command[0]}")
             except IndexError:
-                print(f"Command not found: {command}")
+                print(f"Command not found: {command[0]}")
     return os.getcwd()
 def main(path):
     command = input(f"{path}$: ")
