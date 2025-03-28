@@ -46,7 +46,10 @@ def run_command(command):
                 elif command[0] == "rm":
                     lib.rm(command)    
                 else:
-                    print(f"Command not found: {command[0]}")
+                    try:
+                        os.system(command[0])
+                    except Exception:
+                        print(f"Command not found: {command[0]}")
             except IndexError:
                 print(f"Command not found: {command[0]}")
     return os.getcwd()
